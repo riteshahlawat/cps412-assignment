@@ -6,13 +6,14 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-def save_fig_if_not_exists(file_path: str):
+def save_fig_if_not_exists(file_path: str) -> None:
+    """Saves a matplotlib figure if it does not already exist in the filesystem"""
     file_path = Path(file_path)
     if not file_path.exists():
         plt.savefig(file_path)
 
 
-def main():
+def main() -> None:
     """Main function"""
 
     os.makedirs('charts', exist_ok=True)
@@ -60,8 +61,10 @@ def main():
     save_fig_if_not_exists('charts/chatgpt_quality.png')
     plt.clf()
 
+    # Set same pastel colors for all pie charts
     colors = sns.color_palette('pastel')
     np.random.shuffle(colors)
+
     # ChatGPT for Ideas Pie Chart
     is_using_cgpt_for_ideas_cheating = survey_data['is_using_cgpt_for_ideas_cheating'].value_counts()
     plt.figure(figsize=(6, 6))
